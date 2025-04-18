@@ -3,86 +3,138 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>@ViewData["Title"] - Bilioteca</title>
+
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Bilioteca.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <div class="wrapper">
-        <aside id="sidebar">
-            <div class="d-flex align-items-center p-3">
-                <button class="btn btn-sm btn-light me-2"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#sidebarNav"
-                        aria-controls="sidebarNav"
-                        aria-expanded="true"
-                        aria-label="Toggle navigation">
-                    <i class="lni lni-grid-alt"></i>
-                </button>
-                <div class="sidebar-logo">
-                    <img src="~/images/logo.png" alt="Logo" />
+
+    <div class="page-wrapper chiller-theme toggled">
+        <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+            <i class="fas fa-bars"></i>
+        </a>
+        <nav id="sidebar" class="sidebar-wrapper">
+            <div class="sidebar-content">
+                <!-- Brand -->
+                <div class="sidebar-brand">
+                    <a asp-controller="Home" asp-action="Index">Biblioteca</a>
+                    <div id="close-sidebar">
+                        <i class="fas fa-times"></i>
+                    </div>
+                </div>
+
+                <!-- User Info -->
+                <div class="sidebar-header">
+                    <div class="user-pic">
+                        <img class="img-responsive img-rounded"
+                             src="~/images/users/@User.Identity.Name.png"
+                             alt="User picture">
+                    </div>
+                    <div class="user-info">
+                        <span class="user-name">
+                            @User.Identity.Name
+                        </span>
+                        <span class="user-role">Bibliotecario</span>
+                        <span class="user-status">
+                            <i class="fa fa-circle text-success"></i>
+                            <span>En línea</span>
+                        </span>
+                    </div>
+                </div>
+
+                <!-- Buscador -->
+                <div class="sidebar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control search-menu" placeholder="Buscar...">
+                        <div class="input-group-append">
+                            <span class="input-group-text">
+                                <i class="fa fa-search"></i>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Menú -->
+                <div class="sidebar-menu">
+                    <ul>
+                        <li class="header-menu"><span>GENERAL</span></li>
+
+                        <li>
+                            <a asp-controller="Dashboard" asp-action="Index">
+                                <i class="fa fa-tachometer-alt"></i><span>Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fa fa-book"></i><span>Catálogo</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a asp-controller="Catalog" asp-action="Index">Libros</a></li>
+                                    <li><a asp-controller="Catalog" asp-action="Create">Agregar Libro</a></li>
+                                    <li><a asp-controller="Catalog" asp-action="Categories">Categorías</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li>
+                            <a asp-controller="Users" asp-action="Index">
+                                <i class="fa fa-users"></i><span>Usuarios</span>
+                            </a>
+                        </li>
+
+                        <li class="sidebar-dropdown">
+                            <a href="#">
+                                <i class="fa fa-calendar-check"></i><span>Reservas</span>
+                            </a>
+                            <div class="sidebar-submenu">
+                                <ul>
+                                    <li><a asp-controller="Reservations" asp-action="Index">Ver Reservas</a></li>
+                                    <li><a asp-controller="Reservations" asp-action="Create">Nueva Reserva</a></li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li>
+                            <a asp-controller="Reports" asp-action="Index">
+                                <i class="fa fa-chart-line"></i><span>Reportes</span>
+                            </a>
+                        </li>
+
+                        <li class="header-menu"><span>EXTRA</span></li>
+
+                        <li>
+                            <a asp-controller="Account" asp-action="Logout">
+                                <i class="fa fa-power-off"></i><span>Salir</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
             </div>
 
-            <nav class="collapse show" id="sidebarNav">
-                <ul class="nav flex-column">
-                    <li class="nav-item">
-                        <a asp-area="" asp-controller="Profile" asp-action="Index" class="sidebar-link">
-                            <i class="lni lni-user"></i>
-                            <span class="ms-2">Profile</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="sidebar-link d-flex justify-content-between align-items-center"
-                           data-bs-toggle="collapse"
-                           href="#authMenu"
-                           role="button"
-                           aria-expanded="false"
-                           aria-controls="authMenu">
-                            <div>
-                                <i class="lni lni-protection"></i>
-                                <span class="ms-2">Auth</span>
-                            </div>
-                            <i class="lni lni-chevron-down"></i>
-                        </a>
-                        <div class="collapse ps-4" id="authMenu" data-bs-parent="#sidebarNav">
-                            <ul class="nav flex-column">
-                                <li class="nav-item">
-                                    <a asp-area="" asp-controller="Account" asp-action="Login" class="sidebar-link">
-                                        Login
-                                    </a>
-                                </li>
-                                <li class="nav-item">
-                                    <a asp-area="" asp-controller="Account" asp-action="Register" class="sidebar-link">
-                                        Register
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
-
-                    <!-- ... más ítems análogos ... -->
-
-                </ul>
-            </nav>
-
-            <div class="mt-auto p-3">
-                <a asp-controller="Account" asp-action="Logout" class="sidebar-link d-flex align-items-center">
-                    <i class="lni lni-exit"></i>
-                    <span class="ms-2">Logout</span>
+            <!-- Footer -->
+            <div class="sidebar-footer">
+                <a asp-controller="Notifications" asp-action="Index">
+                    <i class="fa fa-bell"></i><span class="badge badge-pill badge-warning">3</span>
+                </a>
+                <a asp-controller="Messages" asp-action="Index">
+                    <i class="fa fa-envelope"></i><span class="badge badge-pill badge-success">7</span>
                 </a>
             </div>
-        </aside>
+        </nav>
 
-        <main class="main">
-            <div class="container-fluid">
-                @RenderBody()
-            </div>
+        <main class="page-content">
+            @RenderBody()
         </main>
     </div>
+
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
