@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Bilioteca</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Bilioteca.styles.css" asp-append-version="true" />
+</head>
+<body>
+    <div class="wrapper">
+        <aside id="sidebar">
+            <div class="d-flex align-items-center p-3">
+                <button class="btn btn-sm btn-light me-2"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#sidebarNav"
+                        aria-controls="sidebarNav"
+                        aria-expanded="true"
+                        aria-label="Toggle navigation">
+                    <i class="lni lni-grid-alt"></i>
+                </button>
+                <div class="sidebar-logo">
+                    <img src="~/images/logo.png" alt="Logo" />
+                </div>
+            </div>
+
+            <nav class="collapse show" id="sidebarNav">
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a asp-area="" asp-controller="Profile" asp-action="Index" class="sidebar-link">
+                            <i class="lni lni-user"></i>
+                            <span class="ms-2">Profile</span>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="sidebar-link d-flex justify-content-between align-items-center"
+                           data-bs-toggle="collapse"
+                           href="#authMenu"
+                           role="button"
+                           aria-expanded="false"
+                           aria-controls="authMenu">
+                            <div>
+                                <i class="lni lni-protection"></i>
+                                <span class="ms-2">Auth</span>
+                            </div>
+                            <i class="lni lni-chevron-down"></i>
+                        </a>
+                        <div class="collapse ps-4" id="authMenu" data-bs-parent="#sidebarNav">
+                            <ul class="nav flex-column">
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="Account" asp-action="Login" class="sidebar-link">
+                                        Login
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a asp-area="" asp-controller="Account" asp-action="Register" class="sidebar-link">
+                                        Register
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+
+                    <!-- ... más ítems análogos ... -->
+
+                </ul>
+            </nav>
+
+            <div class="mt-auto p-3">
+                <a asp-controller="Account" asp-action="Logout" class="sidebar-link d-flex align-items-center">
+                    <i class="lni lni-exit"></i>
+                    <span class="ms-2">Logout</span>
+                </a>
+            </div>
+        </aside>
+
+        <main class="main">
+            <div class="container-fluid">
+                @RenderBody()
+            </div>
+        </main>
+    </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
