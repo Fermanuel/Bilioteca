@@ -1,0 +1,27 @@
+﻿body {
+    background: #f8f9fa;
+}
+
+.table-section {
+    background: #fff;
+    padding: 2rem;
+    border-radius: .5rem;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
+}
+
+.badge-reserved {
+    background-color: #ffc107;
+    color: #212529;
+}
+
+.badge-active {
+    background-color: #0d6efd;
+}
+
+.badge-complete {
+    background-color: #198754;
+}
+
+.badge-cancel {
+    background-color: #dc3545;
+}
