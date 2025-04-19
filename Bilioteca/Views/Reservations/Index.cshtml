@@ -1,5 +1,119 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
+﻿<div class="container my-5">
+    <div class="table-section">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="bi bi-calendar-check me-2"></i>Reservaciones</h2>
+            <!-- Botón para crear nueva reservación (opcional) -->
+            <button class="btn btn-success" id="btnNuevaReserva">
+                <i class="bi bi-plus-lg"></i> Nueva Reserva
+            </button>
+        </div>
+
+        <div class="table-responsive">
+            <table id="tablaReservas" class="table table-striped align-middle">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Cliente</th>
+                        <th>Libro</th>
+                        <th>Fecha Inicio</th>
+                        <th>Fecha Fin</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Datos dinámicos -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Editar Reservación -->
+<div class="modal fade" id="modalEditar" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <form id="formEditar">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="bi bi-pencil-square me-2"></i>Editar Reservación</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="resId">
+                    <div class="mb-3">
+                        <label class="form-label">Cliente</label>
+                        <input type="text" id="resCliente" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Libro</label>
+                        <input type="text" id="resLibro" class="form-control" required>
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Fecha Inicio</label>
+                            <input type="date" id="resInicio" class="form-control" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Fecha Fin</label>
+                            <input type="date" id="resFin" class="form-control" required>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-save me-1"></i>Actualizar
+                    </button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Cancelar
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Modal: Confirmar Finalizar -->
+<div class="modal fade" id="modalFinalizar" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-success text-white">
+                <h5 class="modal-title"><i class="bi bi-check2-circle me-2"></i>Finalizar</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                ¿Deseas marcar esta reservación como <strong>completada</strong>?
+            </div>
+            <div class="modal-footer">
+                <button id="btnDoFinalizar" class="btn btn-success">Sí, finalizar</button>
+                <button class="btn btn-light" data-bs-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal: Confirmar Cancelar -->
+<div class="modal fade" id="modalCancelar" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title"><i class="bi bi-x-circle me-2"></i>Cancelar</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                ¿Deseas <strong>cancelar</strong> esta reservación?
+            </div>
+            <div class="modal-footer">
+                <button id="btnDoCancelar" class="btn btn-danger">Sí, cancelar</button>
+                <button class="btn btn-light" data-bs-dismiss="modal">No</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link rel="stylesheet" href="~/modules/Reservations/css/reservations.css" />
+}
+
+@section Scripts {
+    <script src="~/modules/Reservations/js/reservations.js"></script>
 }
