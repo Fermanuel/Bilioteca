@@ -1,5 +1,6 @@
 ﻿using Bilioteca.Context;
 using Bilioteca.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Bilioteca.Service.Catalog
 {
@@ -13,8 +14,17 @@ namespace Bilioteca.Service.Catalog
 
         public List<Book> GetAllBook()
         {
-            var books = _context.Book.ToList();
-            return books;
+            try
+            {
+                return _context.Book
+                .FromSqlRaw("EXEC dbo.GET_ALL_BOOKS")
+                .ToList();
+            }
+            catch (Exception ex)
+            {
+
+                throw new Exception(ex.Message);
+            }
         }
     }
 }
