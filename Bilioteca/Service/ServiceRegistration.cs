@@ -1,0 +1,15 @@
+﻿using Bilioteca.Service.Catalog;
+
+namespace Bilioteca.Service
+{
+    // En una carpeta como Services o Infrastructure
+    public static class ServiceRegistration
+    {
+        public static void AddApplicationServices(this IServiceCollection services)
+        {
+            // Agrega aquí más servicios según sea necesario
+            services.AddScoped<CatalogService>();
+        }
+    }
+
+}
