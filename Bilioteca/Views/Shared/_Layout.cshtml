@@ -8,12 +8,12 @@
 
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/lib/font-awesome/css/all.min.css" />
+    <link  rel="stylesheet" href="~/lib/semantic-ui/css/semantic.min.css"/>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Bilioteca.styles.css" asp-append-version="true" />
 
     @await RenderSectionAsync("Styles", required: false)
-
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
 </head>
 <body>
 
@@ -34,9 +34,9 @@
                 <!-- User Info -->
                 <div class="sidebar-header">
                     <div class="user-pic">
-                        <img class="img-responsive img-rounded"
+@*                         <img class="img-responsive img-rounded"
                              src="~/images/users/"
-                             alt="User picture">
+                             alt="User picture"> *@
                     </div>
                     <div class="user-info">
                         <span class="user-name">
@@ -139,6 +139,7 @@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib//semantic-ui/js/semantic.min.js"></script>
     <script src="~/lib/chartjs/chart.umd.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
