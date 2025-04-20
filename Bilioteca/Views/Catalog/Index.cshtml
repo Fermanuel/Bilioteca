@@ -6,11 +6,12 @@
         <table id="catalogoLibros" class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
+                    <th style="display:none;">ID</th>
                     <th>Título</th>
                     <th>Autor</th>
                     <th>Cantidad</th>
-                    <th>Año</th>
-                    <th>Disponibilidad</th>
+                    <th>ISBN</th>
+                    <th>Ubicación</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -20,6 +21,48 @@
         </table>
     </div>
 </div>
+
+<!-- Modal para editar libro -->
+<div class="modal fade" id="editBookModal" tabindex="-1" aria-labelledby="editBookModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <form id="editBookForm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editBookModalLabel">Editar Libro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                </div>
+                <div class="modal-body">
+                    <input type="hidden" id="edit-id" name="id">
+                    <div class="mb-3">
+                        <label for="edit-titulo" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="edit-titulo" name="titulo" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-autor" class="form-label">Autor</label>
+                        <input type="text" class="form-control" id="edit-autor" name="autor" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-cantidad" class="form-label">Cantidad</label>
+                        <input type="number" class="form-control" id="edit-cantidad" name="cantidad" min="0" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-isbn" class="form-label">ISBN</label>
+                        <input type="text" class="form-control" id="edit-isbn" name="isbn" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="edit-ubicacion" class="form-label">Ubicación</label>
+                        <input type="text" class="form-control" id="edit-ubicacion" name="ubicacion" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
 
 @section Styles {
     <link href="~/modules/Catalog/libros/css/catalog.css" rel="stylesheet" />
