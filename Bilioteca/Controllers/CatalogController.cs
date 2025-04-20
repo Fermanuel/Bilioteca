@@ -36,5 +36,20 @@ namespace Bilioteca.Controllers
             var books = _catalogService.GetAllBook();
             return books;
         }
+
+        [HttpDelete]
+        public IActionResult DeleteBook(int id)
+        {
+            try
+            {
+                _catalogService.DeleteBook(id);
+                return Ok(new { message = "Libro eliminado correctamente." });
+            }
+            catch (Exception ex)
+            {
+                // Manejo de errores
+                return StatusCode(500, new { message = "Error al eliminar el libro.", details = ex.Message });
+            }
+        }
     }
 }

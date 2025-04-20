@@ -1,5 +1,6 @@
 ﻿using Bilioteca.Context;
 using Bilioteca.Models;
+using Microsoft.Data.SqlClient;
 using Microsoft.EntityFrameworkCore;
 
 namespace Bilioteca.Service.Catalog
@@ -25,6 +26,12 @@ namespace Bilioteca.Service.Catalog
 
                 throw new Exception(ex.Message);
             }
+        }
+
+        public void DeleteBook(int id)
+        {
+            var parameter = new SqlParameter("@Id", id);
+            _context.Database.ExecuteSqlRaw("EXEC dbo.DELETE_BOOK @Id", parameter);
         }
     }
 }
