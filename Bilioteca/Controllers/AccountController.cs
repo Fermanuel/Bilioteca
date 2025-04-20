@@ -19,21 +19,17 @@ namespace Bilioteca.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(Login login)
+        public JsonResult Login(Login login)
         {
-            if (ModelState.IsValid)
-            {
-                var result = _accountService.Login(login);
-                if (result.Codigo == 1)
-                {
-                    return RedirectToAction("Index", "Dashboard");
-                }
-                else
-                {
-                    ViewBag.LoginError = result.Mensaje;
-                }
-            }
-            return View();
+            if (!ModelState.IsValid)
+                return Json(new { success = false, message = "Datos inválidos." });
+
+            var result = _accountService.Login(login);
+            if (result.Codigo == 1)
+                return Json(new { success = true, redirectUrl = Url.Action("Index", "Dashboard") });
+            else
+                return Json(new { success = false, message = result.Mensaje });
         }
+
     }
 }
