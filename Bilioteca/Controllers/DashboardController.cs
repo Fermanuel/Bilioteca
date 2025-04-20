@@ -11,12 +11,6 @@ namespace Bilioteca.Controllers
             return View();
         }
 
-        // GET: DashboardController/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: DashboardController/Create
         public ActionResult Create()
         {
