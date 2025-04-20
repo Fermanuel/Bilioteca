@@ -1,27 +1,35 @@
 ﻿$(document).ready(function () {
-    $('#loginForm').submit(function (event) {
-        event.preventDefault(); // Evita la recarga de la página
+    $('#loginForm').on('submit', function (event) {
+        event.preventDefault();
 
-        // Obtener los valores de los campos
-        var email = $('input[name="email-user"]').val();
-        var password = $('input[name="password-user"]').val();
+        var email = $('#email-user').val();
+        var password = $('#password-user').val();
 
-        // Enviar los datos al controlador mediante AJAX
+        // Mostrar en consola para depuración
+        console.log('Email:', email);
+        console.log('Password:', password);
+
         $.ajax({
-            url: '/Account/Login', // Reemplaza con la URL de tu controlador
+            url: '/Account/Login',
             type: 'POST',
-            data: {
-                Email: email,
-                Password: password
-            },
+            data: { Email: email, Password: password },
             success: function (response) {
-                // Manejar la respuesta del servidor
-                console.log(response);
-                // Puedes redirigir al usuario o mostrar un mensaje
+                if (response.success) {
+                    window.location.href = response.redirectUrl;
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error de inicio de sesión',
+                        text: response.message
+                    });
+                }
             },
-            error: function (xhr, status, error) {
-                // Manejar errores
-                console.error(error);
+            error: function () {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Ocurrió un problema en la solicitud.'
+                });
             }
         });
     });

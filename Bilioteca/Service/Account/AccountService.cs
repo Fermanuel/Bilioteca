@@ -9,32 +9,34 @@ namespace Bilioteca.Service.Account
     public class AccountService
     {
         private readonly ApplicationDbContext _context;
-        public AccountService(ApplicationDbContext context) 
+        public AccountService(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public bool Login(Login login)
+        public LoginResult Login(Login login)
         {
             var codigoParam = new SqlParameter("@CODIGO", SqlDbType.Int)
             {
                 Direction = ParameterDirection.Output
             };
-
             var mensajeParam = new SqlParameter("@MENSAJE", SqlDbType.VarChar, 255)
             {
                 Direction = ParameterDirection.Output
             };
 
             _context.Database.ExecuteSqlInterpolated(
-                $"EXEC dbo.LOGIN_USER {login.Email}, {login.Password}, {codigoParam} OUTPUT, {mensajeParam} OUTPUT"
+                $"EXEC dbo.LOGIN_USER @EMAIL={login.Email}, @PASSWORD={login.Password}, @CODIGO={codigoParam} OUT, @MENSAJE={mensajeParam} OUT"
             );
 
             int codigo = (int)codigoParam.Value;
-            string mensaje = mensajeParam.Value.ToString();
+            string mensaje = mensajeParam.Value?.ToString() ?? string.Empty;
 
-            return codigo == 0;
+            return new LoginResult
+            {
+                Codigo = codigo,
+                Mensaje = mensaje
+            };
         }
-
     }
 }

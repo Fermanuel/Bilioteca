@@ -1,6 +1,5 @@
 ﻿using Bilioteca.Models;
 using Bilioteca.Service.Account;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Bilioteca.Controllers
@@ -19,20 +18,19 @@ namespace Bilioteca.Controllers
             return View();
         }
 
-        // POST: AccountController/Login
         [HttpPost]
         public ActionResult Login(Login login)
         {
             if (ModelState.IsValid)
             {
                 var result = _accountService.Login(login);
-                if (result)
+                if (result.Codigo == 1)
                 {
                     return RedirectToAction("Index", "Dashboard");
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Email o contraseña incorrectos.");
+                    ViewBag.LoginError = result.Mensaje;
                 }
             }
             return View();
