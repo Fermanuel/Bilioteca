@@ -23,7 +23,6 @@ namespace Bilioteca.Service.Catalog
             }
             catch (Exception ex)
             {
-
                 throw new Exception(ex.Message);
             }
         }

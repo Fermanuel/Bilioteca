@@ -120,4 +120,38 @@
             });
         }
     });
+
+    $(function () {
+        function cargarRoles() {
+            $.ajax({
+                url: '/Users/GetAllRoles',
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+
+                   // console.log(response);
+
+                    var $select = $('#rol');
+                    $select.empty().append('<option value="">Seleccione un rol</option>');
+
+                    $.each(response.data, function (_, rol) {
+                        $select.append(
+                            $('<option></option>')
+                                .val(rol.id) 
+                                .text(rol.nombrE_ROL)
+                        );
+                    });
+                },
+                error: function (xhr, status, error) {
+                    Toast.error('Error al cargar los roles: ' + error);
+                }
+            });
+        }
+
+        cargarRoles();
+
+        $('#modalUsuario').on('show.bs.modal', function () {
+            cargarRoles();
+        });
+    });
 });

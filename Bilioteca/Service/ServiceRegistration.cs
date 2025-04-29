@@ -1,5 +1,6 @@
 ﻿using Bilioteca.Service.Account;
 using Bilioteca.Service.Catalog;
+using Bilioteca.Service.Rol;
 
 namespace Bilioteca.Service
 {
@@ -11,6 +12,7 @@ namespace Bilioteca.Service
             // Agrega aquí más servicios según sea necesario
             services.AddScoped<CatalogService>();
             services.AddScoped<AccountService>();
+            services.AddScoped<RolService>();
         }
     }
 
