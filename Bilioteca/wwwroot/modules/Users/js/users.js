@@ -1,26 +1,5 @@
 ﻿$(document).ready(function () {
 
-    const datosUsuarios = [
-        {
-            id: 1,
-            nombre: 'Juan Pérez',
-            email: 'juan.perez@example.com',
-            rol: 'Administrador'
-        },
-        {
-            id: 2,
-            nombre: 'María López',
-            email: 'maria.lopez@example.com',
-            rol: 'Usuario'
-        },
-        {
-            id: 3,
-            nombre: 'Carlos García',
-            email: 'carlos.garcia@example.com',
-            rol: 'Usuario'
-        }
-    ];
-
     $(function () {
         window.tablaUsuarios = $('#tablaUsuarios').DataTable({
             ajax: {
@@ -33,6 +12,7 @@
             columns: [
                 { data: 'id' },
                 { data: 'email' },
+                { data: 'nombre'},
                 { data: 'apellido' },
                 { data: 'nombrE_CARRERA' },
                 { data: 'matricula' },
@@ -56,21 +36,12 @@
     });
 
 
-
     // Abrir modal para agregar usuario
     $('#btnAgregarUsuario').on('click', function () {
         $('#formUsuario')[0].reset();
         $('#usuarioId').val('');
         $('#modalUsuarioLabel').text('Agregar Usuario');
         $('#modalUsuario').modal('show');
-    });
-
-
-    // Eliminar usuario
-    var idEliminar = null;
-    $('#tablaUsuarios tbody').on('click', '.btnEliminar', function () {
-        idEliminar = $(this).data('id');
-        $('#modalEliminar').modal('show');
     });
 
 

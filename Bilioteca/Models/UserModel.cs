@@ -16,6 +16,7 @@
     {
         public int ID { get; set; }
         public string? EMAIL { get; set; }
+        public string? NOMBRE { get; set; }
         public string? APELLIDO { get; set; }
         public string? NOMBRE_CARRERA { get; set; }
         public int MATRICULA { get; set; }

@@ -79,5 +79,19 @@ namespace Bilioteca.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
+        [HttpPatch]
+        public JsonResult UpdateUser([FromBody] UserModel user)
+        {
+            try
+            {
+                var result = _userService.UpdateUser(user);
+                return Json(result);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
