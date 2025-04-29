@@ -44,6 +44,32 @@
         $('#modalUsuario').modal('show');
     });
 
+    $('#tablaUsuarios tbody').on('click', '.btnEditar', function () {
+        var id = $(this).data('id');
+
+        // Buscar los datos del usuario en la tabla
+        var rowData = tablaUsuarios.rows().data().toArray().find(item => item.id == id);
+
+        if (rowData) {
+            // Llenar el formulario del modal con los datos del usuario
+            $('#usuarioId').val(rowData.id);
+            $('#nombre').val(rowData.nombre);
+            $('#apellido').val(rowData.apellido);
+            $('#email').val(rowData.email);
+            $('#password').val(''); // Dejar vacío por seguridad
+            $('#carrera').val(rowData.carreraId);
+            $('#matricula').val(rowData.matricula);
+            $('#rol').val(rowData.rolId);
+            $('#genero').val(rowData.genero);
+
+            // Cambiar el título del modal
+            $('#modalUsuarioLabel').text('Editar Usuario');
+
+            // Mostrar el modal
+            $('#modalUsuario').modal('show');
+        }
+    });
+
 
     $(function () {
         function cargarRoles() {
