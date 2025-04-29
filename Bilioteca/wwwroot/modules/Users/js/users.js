@@ -56,46 +56,6 @@
         $('#modalUsuario').modal('show');
     });
 
-    // Enviar formulario para agregar o editar usuario
-    $('#formUsuario').on('submit', function (e) {
-        e.preventDefault();
-        var id = $('#usuarioId').val();
-        var url = id ? 'backend/editar_usuario.php' : 'backend/agregar_usuario.php';
-        $.ajax({
-            type: 'POST',
-            url: url,
-            data: $(this).serialize(),
-            success: function (response) {
-                $('#modalUsuario').modal('hide');
-                tabla.ajax.reload();
-            },
-            error: function () {
-                alert('Ocurrió un error al guardar el usuario.');
-            }
-        });
-    });
-
-    // Editar usuario
-    $('#tablaUsuarios tbody').on('click', '.btnEditar', function () {
-        var id = $(this).data('id');
-        $.ajax({
-            type: 'GET',
-            url: 'backend/obtener_usuario.php',
-            data: { id: id },
-            dataType: 'json',
-            success: function (data) {
-                $('#usuarioId').val(data.id);
-                $('#nombre').val(data.nombre);
-                $('#email').val(data.email);
-                $('#rol').val(data.rol);
-                $('#modalUsuarioLabel').text('Editar Usuario');
-                $('#modalUsuario').modal('show');
-            },
-            error: function () {
-                alert('Ocurrió un error al obtener los datos del usuario.');
-            }
-        });
-    });
 
     // Eliminar usuario
     var idEliminar = null;
@@ -104,22 +64,22 @@
         $('#modalEliminar').modal('show');
     });
 
-    $('#btnConfirmarEliminar').on('click', function () {
-        if (idEliminar) {
-            $.ajax({
-                type: 'POST',
-                url: 'backend/eliminar_usuario.php',
-                data: { id: idEliminar },
-                success: function (response) {
-                    $('#modalEliminar').modal('hide');
-                    tabla.ajax.reload();
-                },
-                error: function () {
-                    alert('Ocurrió un error al eliminar el usuario.');
-                }
-            });
-        }
-    });
+    //$('#btnConfirmarEliminar').on('click', function () {
+    //    if (idEliminar) {
+    //        $.ajax({
+    //            type: 'POST',
+    //            url: 'backend/eliminar_usuario.php',
+    //            data: { id: idEliminar },
+    //            success: function (response) {
+    //                $('#modalEliminar').modal('hide');
+    //                tabla.ajax.reload();
+    //            },
+    //            error: function () {
+    //                alert('Ocurrió un error al eliminar el usuario.');
+    //            }
+    //        });
+    //    }
+    //});
 
     $(function () {
         function cargarRoles() {
@@ -188,4 +148,41 @@
         });
     });
 
+    $(function () {
+        $('#formUsuario').on('submit', function (e) {
+            e.preventDefault();
+
+            var user = {
+                Email: $('#email').val(),
+                Password: $('#password').val(),
+                Nombre: $('#nombre').val(),
+                Apellido: $('#apellido').val(),
+                CarreraId: parseInt($('#carrera').val()) || null,
+                Matricula: parseInt($('#matricula').val()),
+                RolId: parseInt($('#rol').val()) || null,
+                Genero: $('#genero').val()
+            };
+
+            $.ajax({
+                url: '/Users/CreateUser',
+                type: 'POST',
+                contentType: 'application/json;',
+                dataType: 'json',
+                data: JSON.stringify(user),
+                success: function (result) {
+
+                    if (result.value.mensaje) {
+
+                        $('#modalUsuario').modal('hide');
+                        Toast.success(result.value.mensaje);
+                    } else {
+                        Toast.error('Error: ' + result.message);
+                    }
+                },
+                error: function (xhr, status, error) {
+                    Toast.error('Error al crear usuario: ' + error);
+                }
+            });
+        });
+    });
 });
