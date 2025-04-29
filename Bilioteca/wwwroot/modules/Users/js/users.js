@@ -21,31 +21,40 @@
         }
     ];
 
-
-
-    // Inicializar DataTable
-    const tabla = $('#tablaUsuarios').DataTable({
-        data: datosUsuarios,
-        columns: [
-            { data: 'id' },
-            { data: 'nombre' },
-            { data: 'email' },
-            { data: 'rol' },
-            {
-                data: null,
-                render: function (data, type, row) {
-                    return `
+    $(function () {
+        window.tablaUsuarios = $('#tablaUsuarios').DataTable({
+            ajax: {
+                url: '/Users/GetAllUser',
+                dataType: 'json',
+                dataSrc: function (json) {
+                    return json.data;
+                }
+            },
+            columns: [
+                { data: 'id' },
+                { data: 'email' },
+                { data: 'apellido' },
+                { data: 'nombrE_CARRERA' },
+                { data: 'matricula' },
+                { data: 'nombrE_ROL' },
+                { data: 'genero' },
+                {
+                    data: null,
+                    orderable: false,
+                    render: function (data, type, row) {
+                        return `
                         <button class="btn btn-sm btn-warning btnEditar" data-id="${row.id}">
                           <i class="bi bi-pencil-square"></i>
                         </button>
                         <button class="btn btn-sm btn-danger btnEliminar" data-id="${row.id}">
                           <i class="bi bi-trash"></i>
-                        </button>
-                      `;
+                        </button>`;
+                    }
                 }
-            }
-        ]
+            ]
+        });
     });
+
 
 
     // Abrir modal para agregar usuario
@@ -64,22 +73,6 @@
         $('#modalEliminar').modal('show');
     });
 
-    //$('#btnConfirmarEliminar').on('click', function () {
-    //    if (idEliminar) {
-    //        $.ajax({
-    //            type: 'POST',
-    //            url: 'backend/eliminar_usuario.php',
-    //            data: { id: idEliminar },
-    //            success: function (response) {
-    //                $('#modalEliminar').modal('hide');
-    //                tabla.ajax.reload();
-    //            },
-    //            error: function () {
-    //                alert('Ocurrió un error al eliminar el usuario.');
-    //            }
-    //        });
-    //    }
-    //});
 
     $(function () {
         function cargarRoles() {
@@ -151,8 +144,7 @@
     $(function () {
         $('#formUsuario').on('submit', function (e) {
             e.preventDefault();
-
-            var user = {
+            const user = {
                 Email: $('#email').val(),
                 Password: $('#password').val(),
                 Nombre: $('#nombre').val(),
@@ -170,11 +162,10 @@
                 dataType: 'json',
                 data: JSON.stringify(user),
                 success: function (result) {
-
                     if (result.value.mensaje) {
-
                         $('#modalUsuario').modal('hide');
                         Toast.success(result.value.mensaje);
+                        window.tablaUsuarios.ajax.reload(null, false);
                     } else {
                         Toast.error('Error: ' + result.message);
                     }
@@ -185,4 +176,5 @@
             });
         });
     });
+
 });

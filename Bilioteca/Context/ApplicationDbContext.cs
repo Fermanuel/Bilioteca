@@ -13,6 +13,7 @@ namespace Bilioteca.Context
         public DbSet<Book> Book { get; set; }
         public DbSet<RolModel> Rol { get; set; }
         public DbSet<CarreraModel> Carrera { get; set; }
+        public DbSet<GetUserModel> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -21,6 +22,7 @@ namespace Bilioteca.Context
             modelBuilder.Entity<Book>().HasNoKey();
             modelBuilder.Entity<RolModel>().HasNoKey();
             modelBuilder.Entity<CarreraModel>().HasNoKey();
+            modelBuilder.Entity<GetUserModel>().HasNoKey();
         }
     }
 }

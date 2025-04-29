@@ -65,5 +65,19 @@ namespace Bilioteca.Controllers
                 throw new Exception(ex.Message);
             }
         }
+
+        [HttpGet]
+        public JsonResult GetAllUser()
+        {
+            try
+            {
+                var users = _userService.GetAllUser();
+                return Json(new { data = users });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

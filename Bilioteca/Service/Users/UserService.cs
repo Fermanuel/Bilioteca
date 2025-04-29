@@ -15,6 +15,19 @@ namespace Bilioteca.Service.Users
             _context = context;
         }
 
+        public List<GetUserModel> GetAllUser()
+        {
+            try
+            {
+                var users = _context.Users.FromSqlRaw("EXEC dbo.GET_ALL_USER").ToList();
+                return users;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public ActionResult CreateUser(UserModel user)
         {
             try
