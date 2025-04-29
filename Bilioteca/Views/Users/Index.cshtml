@@ -36,22 +36,58 @@
                 </div>
                 <div class="modal-body">
                     <input type="hidden" id="usuarioId" name="usuarioId">
+
+                    <!-- Nombre -->
                     <div class="mb-3">
                         <label for="nombre" class="form-label">Nombre</label>
                         <input type="text" class="form-control" id="nombre" name="nombre" required>
                     </div>
+
+                    <!-- Apellido -->
+                    <div class="mb-3">
+                        <label for="apellido" class="form-label">Apellido</label>
+                        <input type="text" class="form-control" id="apellido" name="apellido">
+                    </div>
+
+                    <!-- Email -->
                     <div class="mb-3">
                         <label for="email" class="form-label">Correo Electrónico</label>
                         <input type="email" class="form-control" id="email" name="email" required>
                     </div>
+
+                    <!-- Carrera -->
                     <div class="mb-3">
-                        <label for="rol" class="form-label">Rol</label>
-                        <select class="form-select" id="rol" name="rol" required>
-                            <option value="">Seleccione un rol</option>
-                            <option value="Administrador">Administrador</option>
-                            <option value="Usuario">Usuario</option>
+                        <label for="carrera" class="form-label">Carrera</label>
+                        <select class="form-select" id="carrera" name="carreraId">
+                            <option value="">Seleccione una carrera</option>
                         </select>
                     </div>
+
+                    <!-- Matrícula -->
+                    <div class="mb-3">
+                        <label for="matricula" class="form-label">Matrícula</label>
+                        <input type="number" class="form-control" id="matricula" name="matricula" required>
+                    </div>
+
+                    <!-- Rol -->
+                    <div class="mb-3">
+                        <label for="rol" class="form-label">Rol</label>
+                        <select class="form-select" id="rol" name="rolId" required>
+                            <option value="">Seleccione un rol</option>
+                        </select>
+                    </div>
+
+                    <!-- Género -->
+                    <div class="mb-3">
+                        <label for="genero" class="form-label">Género</label>
+                        <select class="form-select" id="genero" name="genero">
+                            <option value="">Seleccione un género</option>
+                            <option value="Masculino">Masculino</option>
+                            <option value="Femenino">Femenino</option>
+                            <option value="Otro">Otro</option>
+                        </select>
+                    </div>
+
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">Guardar</button>
@@ -61,6 +97,7 @@
         </form>
     </div>
 </div>
+
 
 <!-- Modal para Confirmar Eliminación -->
 <div class="modal fade" id="modalEliminar" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">

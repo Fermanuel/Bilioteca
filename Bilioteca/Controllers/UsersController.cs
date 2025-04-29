@@ -1,4 +1,5 @@
-﻿using Bilioteca.Service.Rol;
+﻿using Bilioteca.Service.Carreras;
+using Bilioteca.Service.Rol;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,9 +8,11 @@ namespace Bilioteca.Controllers
     public class UsersController : Controller
     {
         private readonly RolService _rolService;
-        public UsersController(RolService rolService)
+        private readonly CarrerasService _carrerasService;
+        public UsersController(RolService rolService, CarrerasService carrerasService)
         {
             _rolService = rolService;
+            _carrerasService = carrerasService;
         }
 
         public ActionResult Index()
@@ -25,10 +28,23 @@ namespace Bilioteca.Controllers
                 var roles = _rolService.GetAllRol();
                 return Json(new { data = roles });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                throw new Exception(ex.Message);
+            }
+        }
 
-                throw;
+        [HttpGet]
+        public JsonResult GetAllCarreras()
+        {
+            try
+            {
+                var carrera = _carrerasService.GetAllCarreras();
+                return Json(new { data = carrera });
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
             }
         }
     }

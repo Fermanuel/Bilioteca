@@ -154,4 +154,38 @@
             cargarRoles();
         });
     });
+
+    $(function () {
+        function cargarCarreras() {
+            $.ajax({
+                url: '/Users/GetAllCarreras',
+                type: 'GET',
+                dataType: 'json',
+                success: function (response) {
+
+                    //console.log(response);
+
+                    var $select = $('#carrera');
+                    $select.empty().append('<option value="">Seleccione una carrera</option>');
+                    $.each(response.data, function (_, carrera) {
+                        $select.append(
+                            $('<option></option>')
+                                .val(carrera.id)
+                                .text(carrera.nombrE_CARRERA)
+                        );
+                    });
+                },
+                error: function (xhr, status, error) {
+                    Toast.error('Error al cargar las carreras: ' + error);
+                }
+            });
+        }
+
+        cargarCarreras();
+
+        $('#modalUsuario').on('show.bs.modal', function () {
+            cargarCarreras();
+        });
+    });
+
 });

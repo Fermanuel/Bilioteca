@@ -1,4 +1,5 @@
 ﻿using Bilioteca.Service.Account;
+using Bilioteca.Service.Carreras;
 using Bilioteca.Service.Catalog;
 using Bilioteca.Service.Rol;
 
@@ -13,6 +14,7 @@ namespace Bilioteca.Service
             services.AddScoped<CatalogService>();
             services.AddScoped<AccountService>();
             services.AddScoped<RolService>();
+            services.AddScoped<CarrerasService>();
         }
     }
 
